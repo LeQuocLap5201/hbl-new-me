@@ -1,21 +1,22 @@
 import { Tabs } from "antd";
 import React from "react";
+import TabsNCC from "../components/ContentTabs/TabsNCC";
+import TabsNCO from "../components/ContentTabs/TabsNCO";
 
 export default function Ranks() {
   return (
-    <>
-      <div>Ranks</div>
-      <Tabs defaultActiveKey="1">
-        <Tabs.TabPane tab="Tab 1" key="1">
-          Content of Tab Pane 1
+    <div className="container">
+      <Tabs defaultActiveKey="1" className="ranks-tabs">
+        <Tabs.TabPane tab="NCC" key="1">
+          <TabsNCC />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Tab 2" key="2">
-          Content of Tab Pane 2
+        <Tabs.TabPane tab="NCO" key="2">
+          <TabsNCO />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="Tab 3" key="3">
+        <Tabs.TabPane tab="TAB" key="3">
           Content of Tab Pane 3
         </Tabs.TabPane>
       </Tabs>
-    </>
+    </div>
   );
 }

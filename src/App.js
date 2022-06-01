@@ -3,18 +3,13 @@ import { Route, Routes } from "react-router-dom";
 import "./App.css";
 import Lottie from "lottie-react";
 import Loading from "./lotties/loading.json";
-// import Energy from "./pages/Energy";
-// import History from "./pages/History";
-// import Home from "./pages/Home";
-// import Ranks from "./pages/Ranks";
-// import Update from "./pages/Update";
 import NotFoundPage from "./pages/NotFoundPage";
 
 const Home = React.lazy(() => import("./pages/Home"));
-const Update = React.lazy(() => import("./pages/Update"));
 const Ranks = React.lazy(() => import("./pages/Ranks"));
 const History = React.lazy(() => import("./pages/History"));
 const Energy = React.lazy(() => import("./pages/Energy"));
+const Gift = React.lazy(() => import("./pages/Gift"));
 
 function App() {
   return (
@@ -33,11 +28,15 @@ function App() {
           </div>
         }
       >
+        <header className="container">
+          <img src="/img/logo1.png" alt="logo1" />
+          <img src="/img/logo2.png" alt="logo2" />
+        </header>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="update" element={<Update />} />
           <Route path="ranks" element={<Ranks />} />
           <Route path="history" element={<History />} />
+          <Route path="gift" element={<Gift />} />
           <Route path="energy" element={<Energy />} />
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
