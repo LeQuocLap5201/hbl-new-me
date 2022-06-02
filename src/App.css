@@ -212,7 +212,7 @@ header {
 
 .ranks-tabs .ant-tabs-nav-list .ant-tabs-tab {
   margin: 0;
-  width: 33.333333%;
+  flex: 1;
   justify-content: center;
   font-size: 14px;
   font-weight: 700;
@@ -275,4 +275,59 @@ p.event-end {
 
 .tabs-modal .ant-modal-content {
   border-radius: 8px;
+}
+
+.drawer-history .ant-drawer-content-wrapper {
+  min-height: 120px !important;
+  height: initial !important;
+}
+
+.drawer-history .ant-drawer-body {
+  padding: 0;
+  margin-top: 10px;
+  max-height: calc(100vh - 120px) !important;
+  overflow-y: auto;
+}
+
+.history-collapse {
+  border: 0;
+  background: transparent;
+}
+
+.history-collapse .ant-collapse-item {
+  border: none;
+}
+
+.history-collapse .ant-collapse-header {
+  background: #fff;
+  border-radius: 10px 10px 0px 0px !important;
+  padding: 20px 40px 20px 24px !important;
+  box-shadow: 0 -2px 15px 3px #ddd;
+}
+
+.history-collapse
+  .ant-collapse-item:not(.history-collapse .ant-collapse-item:first-child) {
+  margin-top: -10px;
+}
+
+.history-collapse .ant-collapse-header .anticon {
+  color: #0b8235;
+  font-size: 18px !important;
+}
+
+.history-collapse .ant-collapse-content {
+  border: none;
+  background: #dfffd3;
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.history-collapse .ant-collapse-header .history-collapse__title {
+  flex: 1;
+  font-size: 16px;
+  color: #0b8235;
+  margin-right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }

@@ -1,11 +1,11 @@
 /* eslint-disable jsx-a11y/alt-text */
 import {
   Button,
+  Collapse,
   DatePicker,
   Drawer,
   Form,
   InputNumber,
-  message,
   Select,
   Space,
   Typography,
@@ -13,36 +13,15 @@ import {
 } from "antd";
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import HistoryItem from "../components/HistoryItem";
 import Info from "../components/Info";
-
-const normFile = (e) => {
-  if (Array.isArray(e)) {
-    return e;
-  }
-  return e && e.fileList;
-};
-
-const beforeUpload = (file) => {
-  const isJpgOrPng = file.type === "image/jpeg" || file.type === "image/png";
-  if (!isJpgOrPng) {
-    message.error("You can only upload JPG/PNG file!");
-  }
-  const isLt2M = file.size / 1024 / 1024 < 2;
-  if (!isLt2M) {
-    message.error("Image must smaller than 2MB!");
-  }
-  return isJpgOrPng && isLt2M;
-};
-
-const formatInputNumber = {
-  formatter: (val) => `${val}`.replace(/\B(?=(\d{2})+(?!\d))/g, ","),
-  parser: (val) => val.replace(/\$\s?|(,*)/g, ""),
-};
+import { normFile, beforeUpload, formatInputNumber } from "../support";
 
 export default function Home() {
   const [ellipsis, setEllipsis] = useState(true);
   const [isAgree, setIsAgree] = useState(false);
   const [isModalUpdate, setModalUpdate] = useState(false);
+  const [isModalHistory, setModalHistory] = useState(false);
 
   return (
     <>
@@ -164,14 +143,18 @@ export default function Home() {
               Bảng xếp hạng
             </Button>
           </Link>
-          <Link to="history">
-            <Button block className="btn-primary">
-              <div className="btn-icon">
-                <img srcSet="/img/history.png 2x" alt="icon" />
-              </div>
-              Lịch sử cập nhật
-            </Button>
-          </Link>
+          <Button
+            block
+            className="btn-primary"
+            onClick={() => {
+              setModalHistory(true);
+            }}
+          >
+            <div className="btn-icon">
+              <img srcSet="/img/history.png 2x" alt="icon" />
+            </div>
+            Lịch sử cập nhật
+          </Button>
           <Link to="gift">
             <Button block className="btn-primary">
               <div className="btn-icon">
@@ -291,6 +274,72 @@ export default function Home() {
             </Button>
           </Space>
         </Form>
+      </Drawer>
+      <Drawer
+        className="drawer-update drawer-history"
+        title="Lịch sử cập nhật"
+        placement="bottom"
+        onClose={() => {
+          setModalHistory(false);
+        }}
+        visible={isModalHistory}
+      >
+        <Collapse
+          accordion
+          className="history-collapse"
+          expandIconPosition="right"
+        >
+          <Collapse.Panel
+            header={
+              <div className="history-collapse__title">
+                Ngày 01/07/2022 <img srcSet="/img/edit.png 2x" />
+              </div>
+            }
+            key="1"
+          >
+            <HistoryItem />
+          </Collapse.Panel>
+          <Collapse.Panel
+            header={
+              <div className="history-collapse__title">
+                Ngày 03/07/2022 <img srcSet="/img/edit.png 2x" />
+              </div>
+            }
+            key="2"
+          >
+            <HistoryItem />
+          </Collapse.Panel>
+          <Collapse.Panel
+            header={
+              <div className="history-collapse__title">
+                Ngày 05/07/2022 <img srcSet="/img/edit.png 2x" />
+              </div>
+            }
+            key="3"
+          >
+            <HistoryItem />
+          </Collapse.Panel>
+          <Collapse.Panel
+            header={
+              <div className="history-collapse__title">
+                Ngày 07/07/2022 <img srcSet="/img/edit.png 2x" />
+              </div>
+            }
+            key="4"
+          >
+            <HistoryItem />
+          </Collapse.Panel>
+          <Collapse.Panel
+            header={
+              <div className="history-collapse__title">
+                Ngày 09/07/2022 <img srcSet="/img/edit.png 2x" />
+              </div>
+            }
+            key="5"
+          >
+            <HistoryItem />
+          </Collapse.Panel>
+        </Collapse>
       </Drawer>
     </>
   );

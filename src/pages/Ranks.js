@@ -20,9 +20,9 @@ export default function Ranks() {
         <Tabs.TabPane tab="NCO" key="2">
           <TabsNCO />
         </Tabs.TabPane>
-        <Tabs.TabPane tab="TAB" key="3">
+        {/* <Tabs.TabPane tab="TAB" key="3">
           Content of Tab Pane 3
-        </Tabs.TabPane>
+        </Tabs.TabPane> */}
       </Tabs>
 
       <Info />
@@ -45,7 +45,14 @@ export default function Ranks() {
           nhé!
         </p>
         <Space style={{ width: "100%", justifyContent: "flex-end" }}>
-          <Button className="btn-bg">Đồng ý</Button>
+          <Button
+            onClick={() => {
+              setIsModalVisible(false);
+            }}
+            className="btn-bg"
+          >
+            Đồng ý
+          </Button>
         </Space>
       </Modal>
     </div>
