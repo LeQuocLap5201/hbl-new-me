@@ -14,37 +14,6 @@ header {
   justify-content: space-between;
 }
 
-.info-home h2 {
-  margin-top: 60px;
-  font-family: "Bangers", cursive;
-  text-transform: uppercase;
-  text-align: center;
-  font-size: 36px;
-  text-align: center;
-  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff,
-    1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
-  position: relative;
-}
-
-.info-home h2::before {
-  content: attr(data-text);
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  text-shadow: none;
-  background: linear-gradient(180deg, #019522 0%, #11ec27 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-.info-img {
-  width: 200px;
-  margin: 0 auto;
-  text-align: center;
-}
-
 .home-card__content {
   position: relative;
   padding: 16px 23px;
@@ -253,16 +222,33 @@ header {
   color: #11ec27;
 }
 
-/* .ranks-tabs .ant-tabs-tab.ant-tabs-tab-active::before {
-  content: "";
-  position: absolute;
-  top: 0;
-  width: 100%;
-  height: 2px;
-  background: #389e0d;
-} */
-
 .ranks-tabs .ant-tabs-ink-bar {
   bottom: initial !important;
   background: #389e0d;
+}
+
+.list-ranks {
+  padding: 0 5px;
+}
+
+.tabs-pagination {
+  text-align: center;
+}
+
+.tabs-pagination li {
+  margin: 0;
+}
+
+.tabs-pagination .ant-pagination-item-active {
+  background: #4fb72a;
+  border: 0.5px solid #dadada;
+}
+
+.tabs-pagination .ant-pagination-item-active a {
+  color: #fff;
+}
+
+.tabs-pagination .ant-pagination-jump-next,
+.tabs-pagination .ant-pagination-jump-prev {
+  background: #fff;
 }

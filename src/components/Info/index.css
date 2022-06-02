@@ -1,0 +1,30 @@
+h2 {
+  margin-top: 60px;
+  font-family: "Bangers", cursive;
+  text-transform: uppercase;
+  text-align: center;
+  font-size: 36px;
+  text-align: center;
+  text-shadow: 2px 0 0 #fff, -2px 0 0 #fff, 0 2px 0 #fff, 0 -2px 0 #fff,
+    1px 1px #fff, -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff;
+  position: relative;
+}
+
+h2::before {
+  content: attr(data-text);
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  text-shadow: none;
+  background: linear-gradient(180deg, #019522 0%, #11ec27 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.info-img {
+  width: 200px;
+  margin: 0 auto;
+  text-align: center;
+}
