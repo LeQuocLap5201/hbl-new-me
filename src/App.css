@@ -253,11 +253,16 @@ header {
   color: #11ec27;
 }
 
-.ranks-tabs .ant-tabs-tab.ant-tabs-tab-active::before {
+/* .ranks-tabs .ant-tabs-tab.ant-tabs-tab-active::before {
   content: "";
   position: absolute;
   top: 0;
   width: 100%;
   height: 2px;
+  background: #389e0d;
+} */
+
+.ranks-tabs .ant-tabs-ink-bar {
+  bottom: initial !important;
   background: #389e0d;
 }
