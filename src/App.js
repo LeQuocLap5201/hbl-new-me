@@ -29,8 +29,8 @@ function App() {
         }
       >
         <header className="container">
-          <img src="/img/logo1.png" alt="logo1" />
-          <img src="/img/logo2.png" alt="logo2" />
+          <img srcSet="/img/logo1.png 2x" alt="logo1" />
+          <img srcSet="/img/logo2.png 2x" alt="logo2" />
         </header>
         <Routes>
           <Route path="/" element={<Home />} />

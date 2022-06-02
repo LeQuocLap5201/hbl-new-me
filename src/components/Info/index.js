@@ -9,7 +9,7 @@ export default function Info() {
         className="info-img"
         style={{ backgroundImage: "url(/img/confetti.png)" }}
       >
-        <img src="/img/girl.png" alt="gir" />
+        <img srcSet="/img/girl.png 2x" alt="girl" />
       </div>
     </>
   );

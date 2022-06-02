@@ -152,14 +152,14 @@ export default function Home() {
             }}
           >
             <div className="btn-icon">
-              <img src="/img/update.png" alt="icon" />
+              <img srcSet="/img/update.png 2x" alt="icon" />
             </div>
             Cập nhật hoạt động
           </Button>
           <Link to="ranks">
             <Button block className="btn-primary">
               <div className="btn-icon">
-                <img src="/img/ranks.png" alt="icon" />
+                <img srcSet="/img/ranks.png 2x" alt="icon" />
               </div>
               Bảng xếp hạng
             </Button>
@@ -167,7 +167,7 @@ export default function Home() {
           <Link to="history">
             <Button block className="btn-primary">
               <div className="btn-icon">
-                <img src="/img/history.png" alt="icon" />
+                <img srcSet="/img/history.png 2x" alt="icon" />
               </div>
               Lịch sử cập nhật
             </Button>
@@ -175,7 +175,7 @@ export default function Home() {
           <Link to="gift">
             <Button block className="btn-primary">
               <div className="btn-icon">
-                <img src="/img/gift.png" alt="icon" />
+                <img srcSet="/img/gift.png 2x" alt="icon" />
               </div>
               Quà của tôi
             </Button>
@@ -183,7 +183,7 @@ export default function Home() {
           <Link to="energy">
             <Button block className="btn-primary">
               <div className="btn-icon">
-                <img src="/img/energy.png" alt="icon" />
+                <img srcSet="/img/energy.png 2x" alt="icon" />
               </div>
               Lan tỏa năng lượng
             </Button>
@@ -204,14 +204,14 @@ export default function Home() {
             <InputNumber
               min={1}
               placeholder="Cân nặng"
-              addonAfter={<img src="/img/weight.png" />}
+              addonAfter={<img srcSet="/img/weight.png 2x" />}
             />
           </Form.Item>
           <Form.Item name="height" label="Chiều cao (cm)">
             <InputNumber
               min={1}
               placeholder="Chiều cao"
-              addonAfter={<img src="/img/height.png" />}
+              addonAfter={<img srcSet="/img/height.png 2x" />}
             />
           </Form.Item>
           <Form.Item name="type" label="Loại hoạt động">
@@ -272,7 +272,7 @@ export default function Home() {
             >
               <Button
                 className="btn-upload"
-                icon={<img src="/img/upload.png" />}
+                icon={<img srcSet="/img/upload.png 2x" />}
               >
                 Thêm ảnh
               </Button>
