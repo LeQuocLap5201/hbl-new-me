@@ -4,6 +4,7 @@ import "./App.css";
 import Lottie from "lottie-react";
 import Loading from "./lotties/loading.json";
 import NotFoundPage from "./pages/NotFoundPage";
+import Layout from "./pages/Layout";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Ranks = React.lazy(() => import("./pages/Ranks"));
@@ -28,17 +29,15 @@ function App() {
           </div>
         }
       >
-        <header className="container">
-          <img srcSet="/img/logo1.png 2x" alt="logo1" />
-          <img srcSet="/img/logo2.png 2x" alt="logo2" />
-        </header>
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="ranks" element={<Ranks />} />
-          <Route path="history" element={<History />} />
-          <Route path="gift" element={<Gift />} />
-          <Route path="energy" element={<Energy />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route element={<Layout />}>
+            <Route path="/" element={<Home />} />
+            <Route path="ranks" element={<Ranks />} />
+            <Route path="history" element={<History />} />
+            <Route path="gift" element={<Gift />} />
+            <Route path="energy" element={<Energy />} />
+            <Route path="*" element={<NotFoundPage />} />
+          </Route>
         </Routes>
       </Suspense>
     </div>

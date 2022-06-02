@@ -23,15 +23,6 @@ header {
   border-radius: 20px;
 }
 
-.home-card__content button {
-  background: #b5eca2;
-  border: 1px solid #389e0d;
-  border-radius: 8px;
-  font-size: 14px;
-  color: #1890ff;
-  font-style: italic;
-}
-
 .home-card__title {
   position: absolute;
   top: -2px;
@@ -156,6 +147,16 @@ header {
   font-size: 16px;
 }
 
+.btn-bg {
+  background: #b5eca2;
+  border: 1px solid #389e0d;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 700;
+  color: #1890ff;
+  min-width: 90px;
+}
+
 .btn-icon {
   position: absolute;
   top: 0;
@@ -251,4 +252,27 @@ header {
 .tabs-pagination .ant-pagination-jump-next,
 .tabs-pagination .ant-pagination-jump-prev {
   background: #fff;
+}
+
+p.event-end {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 700;
+  color: #fff;
+  padding: 25px 0;
+}
+
+.tabs-modal .ant-modal-body {
+  padding: 16px 24px;
+}
+
+.tabs-modal .ant-modal-body p {
+  margin-top: 30px;
+  text-align: center;
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.tabs-modal .ant-modal-content {
+  border-radius: 8px;
 }

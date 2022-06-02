@@ -16,6 +16,7 @@ export default function TabsNCO() {
         <RanksItem />
         <RanksItem myRank />
       </div>
+      <Pagination className="tabs-pagination" defaultCurrent={1} total={100} />
     </div>
   );
 }
