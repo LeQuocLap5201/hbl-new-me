@@ -24,7 +24,7 @@ function RanksItem({ rank, name, weight, myRank }) {
       <div className="myRank">
         <span className="myRank__rank">{rank}</span>
         <span className="myRank__name">{name}</span>
-        <span className="myRank__weight">{weight} kg</span>
+        {/* <span className="myRank__weight">{weight} kg</span> */}
       </div>
     );
   }
@@ -33,13 +33,13 @@ function RanksItem({ rank, name, weight, myRank }) {
     <div className="ranks-item">
       <div
         className="ranks-item__rank"
-        style={{ background: listTop.includes(rank) ? "#52c41a" : "#f8a629" }}
+        style={{ background: listTop.includes(rank) ? "#f8a629" : "#52c41a" }}
       >
         {rank}
       </div>
       <div className="ranks-item__content">
         <span className="ranks-item__name">{name}</span>
-        <span className="ranks-item__weight">{weight} kg</span>
+        {/* <span className="ranks-item__weight">{weight} kg</span> */}
       </div>
     </div>
   );

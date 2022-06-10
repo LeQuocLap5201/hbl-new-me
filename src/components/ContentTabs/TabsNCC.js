@@ -2,7 +2,7 @@ import React from "react";
 import TabsTitle from "../TabsTitle";
 import TabsHead from "../TabsHead";
 import RanksItem from "../RanksItem";
-import { Button, Pagination } from "antd";
+import { Pagination } from "antd";
 import PropTypes from "prop-types";
 
 TabsNCC.propTypes = {
@@ -14,12 +14,12 @@ TabsNCC.defaultProps = {
 };
 
 export default function TabsNCC({ showModal }) {
-  const handleShowModal = () => {
-    if (!showModal) {
-      return;
-    }
-    return showModal(true);
-  };
+  // const handleShowModal = () => {
+  //   if (!showModal) {
+  //     return;
+  //   }
+  //   return showModal(true);
+  // };
 
   return (
     <div>
@@ -32,15 +32,19 @@ export default function TabsNCC({ showModal }) {
         <RanksItem />
         <RanksItem myRank />
       </div>
-      <Pagination className="tabs-pagination" defaultCurrent={1} total={100} />
-      <Button
+      {/* <Pagination className="tabs-pagination" defaultCurrent={1} total={100} /> */}
+      {/* <Button
         type="primary"
         block
         style={{ marginTop: 20 }}
         onClick={handleShowModal}
       >
         Show Modal
-      </Button>
+      </Button> */}
+      <p className="no-data">
+        Bảng xếp hạng sẽ được cập nhật ngay khi có kết quả. Bạn quay lại sau
+        nhé!
+      </p>
     </div>
   );
 }

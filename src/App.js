@@ -8,7 +8,6 @@ import Layout from "./pages/Layout";
 
 const Home = React.lazy(() => import("./pages/Home"));
 const Ranks = React.lazy(() => import("./pages/Ranks"));
-const History = React.lazy(() => import("./pages/History"));
 const Energy = React.lazy(() => import("./pages/Energy"));
 const Gift = React.lazy(() => import("./pages/Gift"));
 
@@ -33,7 +32,6 @@ function App() {
           <Route element={<Layout />}>
             <Route path="/" element={<Home />} />
             <Route path="ranks" element={<Ranks />} />
-            <Route path="history" element={<History />} />
             <Route path="gift" element={<Gift />} />
             <Route path="energy" element={<Energy />} />
             <Route path="*" element={<NotFoundPage />} />

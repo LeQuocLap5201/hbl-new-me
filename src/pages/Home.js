@@ -1,27 +1,101 @@
 /* eslint-disable jsx-a11y/alt-text */
-import {
-  Button,
-  Collapse,
-  DatePicker,
-  Drawer,
-  Form,
-  InputNumber,
-  Select,
-  Space,
-  Typography,
-  Upload,
-} from "antd";
-import React, { useState } from "react";
+import { Button, message, Space, Spin, Typography } from "antd";
+import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
-import HistoryItem from "../components/HistoryItem";
 import Info from "../components/Info";
-import { normFile, beforeUpload, formatInputNumber } from "../support";
+import DrawerUpdate from "../components/Drawer/DrawerUpdate";
+import DrawerHistory from "../components/Drawer/DrawerHistory";
+import memberApi from "../api/memberApi";
+import { useQuery } from "react-query";
+import DrawerGift from "../components/Drawer/DrawerGift";
+import DrawerRanks from "../components/Drawer/DrawerRanks";
 
 export default function Home() {
   const [ellipsis, setEllipsis] = useState(true);
-  const [isAgree, setIsAgree] = useState(false);
+  const [showListBtn, setShowListBtn] = useState(false);
+  const [showBtnAgree, setShowBtnAgree] = useState(false);
   const [isModalUpdate, setModalUpdate] = useState(false);
   const [isModalHistory, setModalHistory] = useState(false);
+  const [isModalGift, setModalGift] = useState(false);
+  const [isModalRanks, setModalRanks] = useState(false);
+  const [loadingAgree, setLoadingAgree] = useState(false);
+  const [dataGift, setDataGift] = useState({
+    new_certificates: [1],
+    new_gifts: [1],
+  });
+  // Call Api
+  const { isLoading } = useQuery("member-me", memberApi.getMe, {
+    onSuccess: (data) => {
+      if (data?.data) {
+        setShowBtnAgree(false);
+        setShowListBtn(true);
+      }
+      if (
+        data?.data?.data?.new_certificates?.length !== 0 ||
+        data?.data?.data?.new_gifts?.length !== 0
+      ) {
+        setDataGift({
+          new_certificates: data?.data?.data?.new_certificates,
+          new_gifts: data?.data?.data?.new_gifts?.length,
+        });
+        setModalGift(true);
+      }
+    },
+    onError: (error) => {
+      if (error?.response?.data?.statusCode === 403) {
+        setShowListBtn(false);
+        setShowBtnAgree(true);
+      }
+    },
+  });
+
+  const handleShowUpdate = (val) => {
+    setModalUpdate(val);
+  };
+
+  const handleShowHistory = (val) => {
+    setModalHistory(val);
+  };
+
+  const handleShowGift = (val) => {
+    setModalGift(val);
+  };
+
+  const handleShowRanks = (val) => {
+    setModalRanks(val);
+  };
+
+  const handleReceivedMessage = (event) => {
+    if (event) {
+      let data = JSON.parse(event);
+      let token = data.TOKEN;
+      console.log("token: ", token);
+    }
+  };
+
+  // Accept member
+  const handleAgree = async () => {
+    setLoadingAgree(true);
+    try {
+      await memberApi.memberAccept();
+      setLoadingAgree(false);
+      setShowBtnAgree(false);
+      setShowListBtn(true);
+    } catch (error) {
+      setLoadingAgree(false);
+      message.error("Tham gia chương trình không thành công");
+      console.log(error);
+    }
+  };
+
+  // Get TOKEN from App
+  useEffect(() => {
+    document.addEventListener("message", handleReceivedMessage);
+
+    return () => {
+      document.removeEventListener("message", handleReceivedMessage);
+    };
+  }, []);
 
   return (
     <>
@@ -102,7 +176,20 @@ export default function Home() {
           )}
         </div>
       </div>
-      {!isAgree && (
+      {isLoading && (
+        <div
+          style={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            width: "100%",
+            margin: "20px 0",
+          }}
+        >
+          <Spin />
+        </div>
+      )}
+      {showBtnAgree && (
         <Space
           style={{
             width: "100%",
@@ -112,16 +199,15 @@ export default function Home() {
           }}
         >
           <Button
+            loading={loadingAgree}
             className="btn-agree"
-            onClick={() => {
-              setIsAgree(true);
-            }}
+            onClick={handleAgree}
           >
             Tôi đồng ý tham gia chương trình
           </Button>
         </Space>
       )}
-      {isAgree && (
+      {showListBtn && (
         <div className="list-btn container">
           <Button
             block
@@ -135,14 +221,18 @@ export default function Home() {
             </div>
             Cập nhật hoạt động
           </Button>
-          <Link to="ranks">
-            <Button block className="btn-primary">
-              <div className="btn-icon">
-                <img srcSet="/img/ranks.png 2x" alt="icon" />
-              </div>
-              Bảng xếp hạng
-            </Button>
-          </Link>
+          <Button
+            block
+            className="btn-primary"
+            onClick={() => {
+              setModalRanks(true);
+            }}
+          >
+            <div className="btn-icon">
+              <img srcSet="/img/ranks.png 2x" alt="icon" />
+            </div>
+            Bảng xếp hạng
+          </Button>
           <Button
             block
             className="btn-primary"
@@ -155,14 +245,18 @@ export default function Home() {
             </div>
             Lịch sử cập nhật
           </Button>
-          <Link to="gift">
-            <Button block className="btn-primary">
-              <div className="btn-icon">
-                <img srcSet="/img/gift.png 2x" alt="icon" />
-              </div>
-              Quà của tôi
-            </Button>
-          </Link>
+          <Button
+            block
+            className="btn-primary"
+            onClick={() => {
+              setModalGift(true);
+            }}
+          >
+            <div className="btn-icon">
+              <img srcSet="/img/gift.png 2x" alt="icon" />
+            </div>
+            Quà của tôi
+          </Button>
           <Link to="energy">
             <Button block className="btn-primary">
               <div className="btn-icon">
@@ -173,174 +267,14 @@ export default function Home() {
           </Link>
         </div>
       )}
-      <Drawer
-        className="drawer-update"
-        title="Cập nhật hoạt động"
-        placement="bottom"
-        onClose={() => {
-          setModalUpdate(false);
-        }}
-        visible={isModalUpdate}
-      >
-        <Form className="form-update" layout="vertical">
-          <Form.Item name="weight" label="Cân nặng (kg)">
-            <InputNumber
-              min={1}
-              placeholder="Cân nặng"
-              addonAfter={<img srcSet="/img/weight.png 2x" />}
-            />
-          </Form.Item>
-          <Form.Item name="height" label="Chiều cao (cm)">
-            <InputNumber
-              min={1}
-              placeholder="Chiều cao"
-              addonAfter={<img srcSet="/img/height.png 2x" />}
-            />
-          </Form.Item>
-          <Form.Item name="type" label="Loại hoạt động">
-            <Select placeholder="Loại hoạt động" allowClear>
-              <Select.Option value={1}>Nhảy dây</Select.Option>
-            </Select>
-          </Form.Item>
-          <Form.Item name="time" label="Thời gian hoạt động (phút)">
-            <InputNumber min={1} placeholder="Thời gian hoạt động" />
-          </Form.Item>
-          <Form.Item name="met" label="MET">
-            <InputNumber min={1} placeholder="MET" {...formatInputNumber} />
-          </Form.Item>
-          <Form.Item name="distance" label="Khoảng cách">
-            <InputNumber min={1} placeholder="Khoảng cách" />
-          </Form.Item>
-          <Form.Item name="calo" label="Lượng Kcal tiêu hao">
-            <InputNumber min={1} placeholder="Lượng Kcal tiêu hao" />
-          </Form.Item>
-          <Form.Item name="fat" label="Mỡ (%)">
-            <InputNumber min={1} placeholder="Mỡ" />
-          </Form.Item>
-          <Form.Item name="amountOfBone" label="Lượng xương">
-            <InputNumber min={1} placeholder="Lượng xương" />
-          </Form.Item>
-          <Form.Item name="visceralFat" label="Mỡ nội tạng">
-            <InputNumber min={1} placeholder="Mỡ nội tạng" />
-          </Form.Item>
-          <Form.Item name="chcb" label="CHCB (RMR)">
-            <InputNumber min={1} placeholder="CHCB" />
-          </Form.Item>
-          <Form.Item name="muscleMass" label="Lượng cơ bắp">
-            <InputNumber
-              min={1}
-              placeholder="Lượng cơ bắp"
-              {...formatInputNumber}
-            />
-          </Form.Item>
-          <Form.Item name="bmi" label="Chỉ số cân đối">
-            <InputNumber min={1} placeholder="Chỉ số cân đối" />
-          </Form.Item>
-          <Form.Item name="water" label="Nước (%)">
-            <InputNumber min={1} placeholder="Nước" />
-          </Form.Item>
-          <Form.Item name="atUpdated" label="Ngày cập nhật">
-            <DatePicker placeholder="Ngày cập nhật" format="DD/MM/YYYY" />
-          </Form.Item>
-          <Form.Item
-            name="pictures"
-            valuePropName="fileList"
-            getValueFromEvent={normFile}
-          >
-            <Upload
-              action="https://www.mocky.io/v2/5cc8019d300000980a055e76"
-              listType="picture"
-              maxCount={1}
-              beforeUpload={beforeUpload}
-            >
-              <Button
-                className="btn-upload"
-                icon={<img srcSet="/img/upload.png 2x" />}
-              >
-                Thêm ảnh
-              </Button>
-            </Upload>
-          </Form.Item>
-          <Space
-            style={{
-              width: "100%",
-              justifyContent: "center",
-              marginBottom: 30,
-              marginTop: 40,
-            }}
-          >
-            <Button htmlType="submit" className="btn-submit">
-              Cập nhật
-            </Button>
-          </Space>
-        </Form>
-      </Drawer>
-      <Drawer
-        className="drawer-update drawer-history"
-        title="Lịch sử cập nhật"
-        placement="bottom"
-        onClose={() => {
-          setModalHistory(false);
-        }}
-        visible={isModalHistory}
-      >
-        <Collapse
-          accordion
-          className="history-collapse"
-          expandIconPosition="right"
-        >
-          <Collapse.Panel
-            header={
-              <div className="history-collapse__title">
-                Ngày 01/07/2022 <img srcSet="/img/edit.png 2x" />
-              </div>
-            }
-            key="1"
-          >
-            <HistoryItem />
-          </Collapse.Panel>
-          <Collapse.Panel
-            header={
-              <div className="history-collapse__title">
-                Ngày 03/07/2022 <img srcSet="/img/edit.png 2x" />
-              </div>
-            }
-            key="2"
-          >
-            <HistoryItem />
-          </Collapse.Panel>
-          <Collapse.Panel
-            header={
-              <div className="history-collapse__title">
-                Ngày 05/07/2022 <img srcSet="/img/edit.png 2x" />
-              </div>
-            }
-            key="3"
-          >
-            <HistoryItem />
-          </Collapse.Panel>
-          <Collapse.Panel
-            header={
-              <div className="history-collapse__title">
-                Ngày 07/07/2022 <img srcSet="/img/edit.png 2x" />
-              </div>
-            }
-            key="4"
-          >
-            <HistoryItem />
-          </Collapse.Panel>
-          <Collapse.Panel
-            header={
-              <div className="history-collapse__title">
-                Ngày 09/07/2022 <img srcSet="/img/edit.png 2x" />
-              </div>
-            }
-            key="5"
-          >
-            <HistoryItem />
-          </Collapse.Panel>
-        </Collapse>
-      </Drawer>
+      <DrawerUpdate isShow={isModalUpdate} FnShow={handleShowUpdate} />
+      <DrawerHistory isShow={isModalHistory} FnShow={handleShowHistory} />
+      <DrawerGift
+        isShow={isModalGift}
+        FnShow={handleShowGift}
+        dataGift={dataGift}
+      />
+      <DrawerRanks isShow={isModalRanks} FnShow={handleShowRanks} />
     </>
   );
 }

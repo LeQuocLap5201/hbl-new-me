@@ -124,11 +124,16 @@ header {
   background: #fff;
 }
 
+.form-update label.ant-form-item-required {
+  flex-direction: row-reverse;
+}
+
 .btn-agree {
   background: #eff8ec;
   border: 1px solid #000000;
   border-radius: 5px;
   font-size: 14px;
+  font-weight: 700;
 }
 
 .btn-primary {
@@ -145,6 +150,16 @@ header {
 .btn-primary span {
   font-weight: 700;
   font-size: 16px;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+  border-color: #389e0d;
+}
+
+.btn-primary:hover span,
+.btn-primary:focus span {
+  color: #389e0d;
 }
 
 .btn-bg {
@@ -177,12 +192,50 @@ header {
 }
 
 .btn-submit span {
-  font-weight: 700;
+  font-weight: 500;
   font-size: 16px;
+  color: #fff;
+}
+
+.btn-submit:hover,
+.btn-submit:focus {
+  border-color: #389e0d;
+}
+
+.btn-submit:hover span,
+.btn-submit:focus span {
+  color: #389e0d;
+  font-weight: 700;
+}
+
+.btn-second {
+  background: #fff;
+  border: 1px solid #389e0d;
+  border-radius: 10px;
+  padding: 8px 30px;
+  height: initial;
+}
+
+.btn-second span {
+  font-weight: 500;
+  font-size: 16px;
+  color: #389e0d;
+}
+
+.btn-second:hover,
+.btn-second:focus {
+  border-color: #389e0d;
+  background: #389e0d;
+}
+
+.btn-second:hover span,
+.btn-second:focus span {
+  color: #fff;
+  font-weight: 700;
 }
 
 .btn-upload {
-  margin-top: 25px;
+  /* margin-top: 25px; */
   background: transparent;
   border: 0.4px solid #000;
   border-radius: 5px;
@@ -193,13 +246,23 @@ header {
   font-weight: 600;
 }
 
+.btn-upload:hover,
+.btn-upload:focus {
+  border-color: #000;
+}
+
+.btn-upload:hover span,
+.btn-upload:focus span {
+  color: #000;
+}
+
 .btn-upload img {
   margin-right: 5px;
 }
 
-.ranks-tabs {
+/* .ranks-tabs {
   margin-top: 20px;
-}
+} */
 
 .ranks-tabs .ant-tabs-nav {
   margin-bottom: 0;
@@ -229,7 +292,7 @@ header {
 }
 
 .list-ranks {
-  padding: 0 5px;
+  padding: 0 20px;
 }
 
 .tabs-pagination {
@@ -318,7 +381,7 @@ p.event-end {
 .history-collapse .ant-collapse-content {
   border: none;
   background: #dfffd3;
-  max-height: 300px;
+  max-height: 60vh;
   overflow-y: auto;
 }
 
@@ -330,4 +393,131 @@ p.event-end {
   display: flex;
   align-items: center;
   justify-content: space-between;
+}
+
+.drawer-gift .ant-drawer-content-wrapper,
+.drawer-ranks .ant-drawer-content-wrapper {
+  min-height: calc(100vh - 70px) !important;
+}
+
+.drawer-gift .ant-drawer-header,
+.drawer-ranks .ant-drawer-header {
+  padding: 10px;
+}
+
+.drawer-gift .ant-drawer-body,
+.drawer-ranks .ant-drawer-body {
+  padding: 0;
+}
+
+.gift,
+.ranks {
+  padding: 10px;
+  padding-top: 0;
+}
+
+.gift p.white {
+  font-size: 16px;
+  font-weight: 700;
+  color: #3aa015;
+  text-transform: uppercase;
+  text-align: center;
+  margin: 0;
+}
+
+.gift p.green {
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+  color: #236238;
+  transform: translateY(-80%);
+}
+
+.gift-content {
+  position: relative;
+  margin: 0 -10px;
+}
+
+.gift-svg {
+  background: rgb(255, 255, 255);
+  background: radial-gradient(
+    50% 50% at 50% 50%,
+    #ffffff 0%,
+    rgba(255, 255, 255, 0.91) 5%,
+    rgba(255, 255, 255, 0.67) 20%,
+    rgba(255, 255, 255, 0.47) 35%,
+    rgba(255, 255, 255, 0.3) 50%,
+    rgba(255, 255, 255, 0.17) 64%,
+    rgba(255, 255, 255, 0.08) 77%,
+    rgba(255, 255, 255, 0.02) 90%,
+    rgba(255, 255, 255, 0) 100%
+  );
+}
+
+.gift-detail {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+p.no-data {
+  font-weight: 700;
+  font-size: 18px;
+  text-align: center;
+  max-width: 310px;
+  margin: 0 auto;
+  margin-top: 20px;
+}
+
+@media screen and (min-width: 400px) {
+  .space-list {
+    max-width: 300px;
+  }
+}
+
+.modal-accept .ant-modal-content {
+  border-radius: 5px;
+}
+
+.modal-accept .ant-modal-body {
+  padding: 20px;
+}
+
+.modal-accept .ant-modal-body .ant-modal-confirm-title {
+  font-size: 16px;
+  line-height: 18px;
+  margin-bottom: 15px;
+}
+
+.modal-accept .ant-modal-body .ant-modal-confirm-content {
+  text-align: center;
+}
+
+.modal-accept .ant-progress-text {
+  font-size: 17px;
+  font-weight: 500;
+}
+
+.modal-accept .ant-btn {
+  min-width: 70px;
+  border-radius: 5px;
+}
+
+.modal-accept .ant-btn span {
+  font-weight: 600;
+  font-size: 16px;
+  letter-spacing: 0.5px;
+  /* color: #fff; */
+}
+
+.modal-accept .ant-btn.ant-btn-primary {
+  background-color: #3aa015;
+  border-color: #3aa015;
+}
+
+.modal-accept .ant-btn.ant-btn-default {
+  background-color: #dadada;
+  border-color: #dadada;
 }

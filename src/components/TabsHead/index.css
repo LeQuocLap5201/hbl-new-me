@@ -2,6 +2,7 @@
   display: flex;
   justify-content: space-between;
   margin-bottom: 10px;
+  padding: 0 20px;
 }
 
 .tabs-head__box {
@@ -20,13 +21,13 @@
 }
 
 .tabs-head__shape {
-  width: 13%;
+  width: 12%;
 }
 
 .tabs-head__name {
-  width: 58%;
+  width: 85%;
 }
 
-.tabs-head__weight {
+/* .tabs-head__weight {
   width: 27%;
-}
+} */

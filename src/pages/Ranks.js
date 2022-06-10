@@ -20,14 +20,8 @@ export default function Ranks() {
         <Tabs.TabPane tab="NCO" key="2">
           <TabsNCO />
         </Tabs.TabPane>
-        {/* <Tabs.TabPane tab="TAB" key="3">
-          Content of Tab Pane 3
-        </Tabs.TabPane> */}
       </Tabs>
-
-      <Info />
-      <p className="event-end">CHƯƠNG TRÌNH ĐÃ KẾT THÚC. </p>
-
+      <Info isEventEnd />
       <Modal
         className="tabs-modal"
         visible={isModalVisible}
