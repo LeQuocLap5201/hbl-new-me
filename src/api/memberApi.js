@@ -2,7 +2,7 @@ import axiosClient from "./axiosClient";
 
 const memberApi = {
   getMe() {
-    const url = "member/members/me";
+    const url = "/member/new-me-member/me";
     return axiosClient.get(url);
   },
 
@@ -17,23 +17,33 @@ const memberApi = {
   },
 
   addHealInfo(data) {
-    const url = "member/newmehealth";
+    const url = "member/new-me-health";
     return axiosClient.post(url, data);
   },
 
-  getListHistory() {
-    const url = "member/newmehealth/title";
+  getListHistory(idRace) {
+    const url = `member/new-me-health/title?race_id=${idRace}`;
     return axiosClient.get(url);
   },
 
   getHealInfoById(id) {
-    const url = `member/newmehealth/${id}`;
+    const url = `member/new-me-health/${id}`;
     return axiosClient.get(url);
   },
 
   updateHealInfo({ id, data }) {
-    const url = `member/newmehealth/${id}`;
+    const url = `member/new-me-health/${id}`;
     return axiosClient.patch(url, data);
+  },
+
+  getListRace() {
+    const url = "member/race";
+    return axiosClient.get(url);
+  },
+
+  getRaceDetail() {
+    const url = "member/race/detail";
+    return axiosClient.get(url);
   },
 };
 

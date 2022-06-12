@@ -10,6 +10,7 @@
     "antd": "^4.20.6",
     "axios": "^0.27.2",
     "lodash": "^4.17.21",
+    "lodash.debounce": "^4.0.8",
     "lottie-react": "^2.2.1",
     "moment": "^2.29.3",
     "react": "^18.1.0",

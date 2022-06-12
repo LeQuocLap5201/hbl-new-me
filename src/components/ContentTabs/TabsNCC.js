@@ -1,9 +1,10 @@
-import React from "react";
+import React, { useState } from "react";
 import TabsTitle from "../TabsTitle";
 import TabsHead from "../TabsHead";
 import RanksItem from "../RanksItem";
 import { Pagination } from "antd";
 import PropTypes from "prop-types";
+import FilterRanks from "../FilterRanks";
 
 TabsNCC.propTypes = {
   showModal: PropTypes.func,
@@ -21,9 +22,17 @@ export default function TabsNCC({ showModal }) {
   //   return showModal(true);
   // };
 
+  // Data filter
+  const [filter, setFilter] = useState({ race_id: 1, area_id: 3 });
+
+  const filterChange = (val) => {
+    setFilter({ ...val });
+  };
+
   return (
     <div>
       <TabsTitle />
+      <FilterRanks filterDefault={filter} onFilterChange={filterChange} />
       <TabsHead />
       <div className="list-ranks">
         <RanksItem rank={1} />

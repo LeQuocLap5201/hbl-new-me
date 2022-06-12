@@ -2,10 +2,10 @@
 import React from "react";
 import PropTypes from "prop-types";
 import { Collapse, Drawer, Spin } from "antd";
-import HistoryItem from "../HistoryItem";
 import { useQuery } from "react-query";
 import memberApi from "../../api/memberApi";
 import moment from "moment";
+import CollapseSecond from "../CollapseSecond";
 
 DrawerHistory.propTypes = {
   isShow: PropTypes.bool,
@@ -25,13 +25,10 @@ function DrawerHistory({ isShow, FnShow }) {
     return FnShow(false);
   };
 
-  const { data, isLoading } = useQuery(
-    "list-history",
-    memberApi.getListHistory,
-    {
-      enabled: isShow,
-    }
-  );
+  const { data, isLoading } = useQuery("list-race", memberApi.getListRace, {
+    enabled: isShow,
+    select: (data) => data.data?.items,
+  });
 
   return (
     <Drawer
@@ -41,11 +38,7 @@ function DrawerHistory({ isShow, FnShow }) {
       onClose={closeDrawer}
       visible={isShow}
     >
-      <Collapse
-        accordion
-        className="history-collapse"
-        expandIconPosition="right"
-      >
+      <Collapse accordion style={{ border: "none", background: "transparent" }}>
         {isLoading && (
           <div
             style={{
@@ -59,21 +52,29 @@ function DrawerHistory({ isShow, FnShow }) {
             <Spin />
           </div>
         )}
-        {data?.data?.data?.length === 0 && (
+
+        {data?.length === 0 && (
           <p style={{ textAlign: "center", fontSize: 18 }}>Trống</p>
         )}
 
-        {data?.data?.data?.length !== 0 &&
-          data?.data?.data?.map((item) => (
+        {data?.length !== 0 &&
+          data?.map((obj) => (
             <Collapse.Panel
+              className="collapse-panel__primary"
               header={
-                <div className="history-collapse__title">
-                  Ngày {moment(item?.created_at).format("DD/MM/YYYY")}{" "}
-                </div>
+                <>
+                  <p
+                    style={{ fontWeight: 700, letterSpacing: 1 }}
+                  >{`${obj?.title}`}</p>
+                  <p>{`${moment(obj?.created_at).format(
+                    "DD/MM/YYYY"
+                  )} - ${moment(obj?.ended_at).format("DD/MM/YYYY")}`}</p>
+                </>
               }
-              key={item?.new_me_health_id}
+              showArrow={false}
+              key={`history-race-${obj?.race_id}`}
             >
-              <HistoryItem id={item?.new_me_health_id} />
+              <CollapseSecond idRace={obj?.race_id} />
             </Collapse.Panel>
           ))}
       </Collapse>

@@ -9,6 +9,7 @@ import memberApi from "../api/memberApi";
 import { useQuery } from "react-query";
 import DrawerGift from "../components/Drawer/DrawerGift";
 import DrawerRanks from "../components/Drawer/DrawerRanks";
+import DrawerListGift from "../components/Drawer/DrawerListGift";
 
 export default function Home() {
   const [ellipsis, setEllipsis] = useState(true);
@@ -17,26 +18,24 @@ export default function Home() {
   const [isModalUpdate, setModalUpdate] = useState(false);
   const [isModalHistory, setModalHistory] = useState(false);
   const [isModalGift, setModalGift] = useState(false);
+  const [isModalListGift, setModalListGift] = useState(false);
   const [isModalRanks, setModalRanks] = useState(false);
   const [loadingAgree, setLoadingAgree] = useState(false);
   const [dataGift, setDataGift] = useState({
-    new_certificates: [1],
-    new_gifts: [1],
+    new_certificates: [],
+    new_gifts: [],
   });
   // Call Api
   const { isLoading } = useQuery("member-me", memberApi.getMe, {
-    onSuccess: (data) => {
-      if (data?.data) {
+    onSuccess: ({ data }) => {
+      if (data?.item) {
         setShowBtnAgree(false);
         setShowListBtn(true);
       }
-      if (
-        data?.data?.data?.new_certificates?.length !== 0 ||
-        data?.data?.data?.new_gifts?.length !== 0
-      ) {
+      if (data?.item?.new_certificates || data?.item?.new_gifts) {
         setDataGift({
-          new_certificates: data?.data?.data?.new_certificates,
-          new_gifts: data?.data?.data?.new_gifts?.length,
+          new_certificates: data?.item?.new_certificates || [],
+          new_gifts: data?.item?.new_gifts || [],
         });
         setModalGift(true);
       }
@@ -59,6 +58,10 @@ export default function Home() {
 
   const handleShowGift = (val) => {
     setModalGift(val);
+  };
+
+  const handleShowListGift = (val) => {
+    setModalListGift(val);
   };
 
   const handleShowRanks = (val) => {
@@ -249,7 +252,7 @@ export default function Home() {
             block
             className="btn-primary"
             onClick={() => {
-              setModalGift(true);
+              setModalListGift(true);
             }}
           >
             <div className="btn-icon">
@@ -275,6 +278,7 @@ export default function Home() {
         dataGift={dataGift}
       />
       <DrawerRanks isShow={isModalRanks} FnShow={handleShowRanks} />
+      <DrawerListGift isShow={isModalListGift} FnShow={handleShowListGift} />
     </>
   );
 }

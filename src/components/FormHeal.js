@@ -46,6 +46,7 @@ const openNotificationWithIcon = (type) => {
 function FormHeal({ isDetail, idDetail, FnShow, form }) {
   const formDefault = useRef();
   const [formChange, setFormChange] = useState({});
+  const [isDisabled, setIsDisabled] = useState(false);
   const closeDrawer = () => {
     if (!FnShow) {
       return;
@@ -77,7 +78,7 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
     ["history", idDetail],
     async () => {
       const { data } = await memberApi.getHealInfoById(idDetail);
-      return data?.data;
+      return data?.item;
     },
     {
       enabled: !!idDetail,
@@ -100,6 +101,7 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
               : [],
         };
 
+        setIsDisabled(!data?.is_update);
         setListImages(data?.images?.length !== 0 ? data?.images : []);
       },
     }
@@ -108,8 +110,9 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
   const queryClient = useQueryClient();
   const update = useMutation(memberApi.updateHealInfo, {
     onSuccess: (data, variables) => {
+      console.log("data: ", data.data?.item);
       setFormChange({});
-      queryClient.setQueryData(["history", variables.id], data.data?.data);
+      queryClient.setQueryData(["history", variables.id], data.data?.item);
       message.success("Cập nhật thành công");
     },
     onError: () => {
@@ -292,6 +295,7 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
         rules={[{ required: true, message: "Vui lòng nhập cân nặng" }]}
       >
         <InputNumber
+          disabled={isDisabled}
           inputMode="numeric"
           min={1}
           placeholder="Cân nặng"
@@ -306,6 +310,7 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
         rules={[{ required: true, message: "Vui lòng nhập chiều cao" }]}
       >
         <InputNumber
+          disabled={isDisabled}
           {...formatInputNumber}
           min={1}
           placeholder="Chiều cao"
@@ -314,7 +319,13 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
         />
       </Form.Item>
       <Form.Item name="bmi" label="BMI">
-        <InputNumber inputMode="numeric" min={1} placeholder="BMI" readOnly />
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="BMI"
+          readOnly
+        />
       </Form.Item>
       {/* <Form.Item name="type" label="Loại hoạt động">
           <Select placeholder="Loại hoạt động" allowClear>
@@ -323,6 +334,7 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
         </Form.Item> */}
       <Form.Item name="time" label="Thời gian hoạt động (phút)">
         <InputNumber
+          disabled={isDisabled}
           inputMode="numeric"
           min={1}
           placeholder="Thời gian hoạt động"
@@ -338,34 +350,61 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
           <InputNumber min={1} placeholder="Lượng Kcal tiêu hao" />
         </Form.Item> */}
       <Form.Item name="fat_percentage" label="Mỡ (%)">
-        <InputNumber inputMode="numeric" min={1} placeholder="Mỡ" />
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="Mỡ"
+        />
       </Form.Item>
       <Form.Item name="amount_of_bones" label="Lượng xương">
-        <InputNumber inputMode="numeric" min={1} placeholder="Lượng xương" />
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="Lượng xương"
+        />
       </Form.Item>
       <Form.Item name="visceral_fat" label="Mỡ nội tạng">
-        <InputNumber inputMode="numeric" min={1} placeholder="Mỡ nội tạng" />
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="Mỡ nội tạng"
+        />
       </Form.Item>
       <Form.Item name="chcb" label="CHCB (RMR)">
-        <InputNumber inputMode="numeric" min={1} placeholder="CHCB" />
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="CHCB"
+        />
       </Form.Item>
       <Form.Item name="amount_of_muscle" label="Lượng cơ bắp">
         <InputNumber
+          disabled={isDisabled}
           inputMode="numeric"
           min={1}
           placeholder="Lượng cơ bắp"
           {...formatInputNumber}
         />
       </Form.Item>
-      <Form.Item
-        name="balance_index"
-        label="Chỉ số cân đối"
-        // rules={[{ required: true, message: "Vui lòng nhập chỉ số cân đối" }]}
-      >
-        <InputNumber inputMode="numeric" min={1} placeholder="Chỉ số cân đối" />
+      <Form.Item name="balance_index" label="Chỉ số cân đối">
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="Chỉ số cân đối"
+        />
       </Form.Item>
       <Form.Item name="water_percentage" label="Nước (%)">
-        <InputNumber inputMode="numeric" min={1} placeholder="Nước" />
+        <InputNumber
+          disabled={isDisabled}
+          inputMode="numeric"
+          min={1}
+          placeholder="Nước"
+        />
       </Form.Item>
 
       {isDetail && (
@@ -376,10 +415,11 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
           uploadChange={handleImageChange}
           valueChange={formChange}
           handleValueChange={handleUploadChange}
+          isDisabled={isDisabled}
         />
       )}
 
-      {isDetail && Object.keys(formChange).length > 0 && (
+      {isDetail && Object.keys(formChange).length > 0 && !isDisabled && (
         <Space
           className="space-list"
           style={{
@@ -418,9 +458,13 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
       )}
 
       {!isDetail && (
-        <UploadCustom nameField="images" uploadChange={handleImageChange} />
+        <UploadCustom
+          nameField="images"
+          uploadChange={handleImageChange}
+          isDisabled={isDisabled}
+        />
       )}
-      {!isDetail && (
+      {!isDetail && !isDisabled && (
         <Space
           style={{
             width: "100%",

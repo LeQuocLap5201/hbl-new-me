@@ -13,6 +13,7 @@ UploadCustom.propTypes = {
   nameField: PropTypes.string,
   valueChange: PropTypes.any,
   handleValueChange: PropTypes.func,
+  isDisabled: PropTypes.bool,
 };
 
 UploadCustom.defaultProps = {
@@ -22,6 +23,7 @@ UploadCustom.defaultProps = {
   nameField: "images",
   valueChange: {},
   handleValueChange: null,
+  isDisabled: false,
 };
 
 function UploadCustom({
@@ -31,6 +33,7 @@ function UploadCustom({
   listDetail,
   valueChange,
   handleValueChange,
+  isDisabled,
 }) {
   const [isSpinning, setIsSpinning] = useState(false);
   const [listImages, setListImages] = useState(() =>
@@ -73,12 +76,12 @@ function UploadCustom({
       if (isDetail) {
         setListUploadDetail({
           ...listUploadDetail,
-          [uIdCurrent.current]: data?.data,
+          [uIdCurrent.current]: data?.item?.url,
         });
       } else {
         setListImages({
           ...listImages,
-          [uIdCurrent.current]: data?.data,
+          [uIdCurrent.current]: data?.item?.url,
         });
       }
     } catch (error) {
@@ -135,6 +138,7 @@ function UploadCustom({
       getValueFromEvent={normFile}
     >
       <Upload
+        disabled={isDisabled}
         className="hbl-upload"
         customRequest={uploadImage}
         listType="picture"
