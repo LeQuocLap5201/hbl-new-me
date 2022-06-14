@@ -34,8 +34,8 @@ function App() {
             <Route path="ranks" element={<Ranks />} />
             <Route path="gift" element={<Gift />} />
             <Route path="energy" element={<Energy />} />
-            <Route path="*" element={<NotFoundPage />} />
           </Route>
+          <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </Suspense>
     </div>

@@ -1,5 +1,5 @@
 /* eslint-disable jsx-a11y/alt-text */
-import { Button, message, Space, Spin, Typography } from "antd";
+import { Button, message, Space, Typography } from "antd";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import Info from "../components/Info";
@@ -10,6 +10,7 @@ import { useQuery } from "react-query";
 import DrawerGift from "../components/Drawer/DrawerGift";
 import DrawerRanks from "../components/Drawer/DrawerRanks";
 import DrawerListGift from "../components/Drawer/DrawerListGift";
+import Hourglass from "../components/Hourglass";
 
 export default function Home() {
   const [ellipsis, setEllipsis] = useState(true);
@@ -127,17 +128,8 @@ export default function Home() {
             <ol>
               <li>Ghi nhận kết quả tham gia</li>
               <li>Giấy chứng nhận</li>
-              <li>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet.
-              </li>
-              <li>
-                Amet minim mollit non deserunt ullamco est sit aliqua dolor do
-                amet sint. Velit officia consequat duis enim velit mollit.
-                Exercitation veniam consequat sunt nostrud amet. Amet minim
-                mollit non deserunt{" "}
-              </li>
+              <li>Nhận những phần quà hấp dẫn từ Herbalife</li>
+              <li>Theo dõi được “Bản thân mới”</li>
             </ol>
             <p>Exercitation veniam consequat sunt nostrud amet.</p>
           </Typography.Paragraph>
@@ -189,7 +181,7 @@ export default function Home() {
             margin: "20px 0",
           }}
         >
-          <Spin />
+          <Hourglass />
         </div>
       )}
       {showBtnAgree && (

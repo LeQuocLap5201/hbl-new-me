@@ -9,6 +9,7 @@
     "@testing-library/user-event": "^13.5.0",
     "antd": "^4.20.6",
     "axios": "^0.27.2",
+    "file-saver": "^2.0.5",
     "lodash": "^4.17.21",
     "lodash.debounce": "^4.0.8",
     "lottie-react": "^2.2.1",

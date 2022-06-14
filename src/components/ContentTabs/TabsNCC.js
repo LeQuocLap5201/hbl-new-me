@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import TabsTitle from "../TabsTitle";
 import TabsHead from "../TabsHead";
 import RanksItem from "../RanksItem";
-import { Pagination } from "antd";
+// import { Pagination } from "antd";
 import PropTypes from "prop-types";
 import FilterRanks from "../FilterRanks";
 
@@ -39,7 +39,12 @@ export default function TabsNCC({ showModal }) {
         <RanksItem rank={2} />
         <RanksItem rank={3} />
         <RanksItem />
-        <RanksItem myRank />
+        <RanksItem myRank rank={5} />
+        <RanksItem rank={6} />
+        <RanksItem rank={7} />
+        <RanksItem rank={8} />
+        <RanksItem rank={9} />
+        <RanksItem rank={10} />
       </div>
       {/* <Pagination className="tabs-pagination" defaultCurrent={1} total={100} /> */}
       {/* <Button

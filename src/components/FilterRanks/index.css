@@ -5,3 +5,12 @@
 .filter-ranks .ant-select-selector {
   border-radius: 5px !important;
 }
+
+.filter-ranks .ant-select:not(.ant-select-disabled):hover .ant-select-selector {
+  border-color: #41940f;
+}
+
+.filter-ranks .ant-select-clear,
+.filter-ranks .ant-select-arrow {
+  color: #41940f;
+}

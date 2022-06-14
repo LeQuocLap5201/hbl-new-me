@@ -1,11 +1,12 @@
 /* eslint-disable jsx-a11y/alt-text */
 import React from "react";
 import PropTypes from "prop-types";
-import { Collapse, Drawer, Spin } from "antd";
+import { Collapse, Drawer } from "antd";
 import { useQuery } from "react-query";
 import memberApi from "../../api/memberApi";
 import moment from "moment";
 import CollapseSecond from "../CollapseSecond";
+import Hourglass from "../Hourglass";
 
 DrawerHistory.propTypes = {
   isShow: PropTypes.bool,
@@ -49,7 +50,7 @@ function DrawerHistory({ isShow, FnShow }) {
               margin: "20px 0",
             }}
           >
-            <Spin />
+            <Hourglass />
           </div>
         )}
 

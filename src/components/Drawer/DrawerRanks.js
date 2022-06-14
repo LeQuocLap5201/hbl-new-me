@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import { Drawer, Tabs } from "antd";
 import TabsNCC from "../ContentTabs/TabsNCC";
 import TabsNCO from "../ContentTabs/TabsNCO";
+import TabsTAB from "../ContentTabs/TabsTAB";
 
 DrawerRanks.propTypes = {
   isShow: PropTypes.bool,
@@ -36,6 +37,9 @@ function DrawerRanks({ isShow, FnShow }) {
           </Tabs.TabPane>
           <Tabs.TabPane tab="NCO" key="2">
             <TabsNCO />
+          </Tabs.TabPane>
+          <Tabs.TabPane tab="TAB" key="3">
+            <TabsTAB />
           </Tabs.TabPane>
         </Tabs>
       </div>

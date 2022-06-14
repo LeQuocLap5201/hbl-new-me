@@ -1,6 +1,6 @@
 import React from "react";
 import Lottie from "lottie-react";
-import Confeti from "../lotties/confeti.json";
+import Confeti from "../lotties/confetti.json";
 import Certificate from "../components/Certificate";
 
 export default function Gift() {

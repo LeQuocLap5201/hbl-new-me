@@ -2,7 +2,7 @@ import React from "react";
 import PropTypes from "prop-types";
 import { Drawer } from "antd";
 import Lottie from "lottie-react";
-import Confeti from "../../lotties/confettiv2.json";
+import Confeti from "../../lotties/confetti.json";
 import Certificate from "../Certificate";
 
 DrawerGift.propTypes = {

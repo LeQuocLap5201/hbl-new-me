@@ -45,6 +45,11 @@ const memberApi = {
     const url = "member/race/detail";
     return axiosClient.get(url);
   },
+
+  getMyGifts() {
+    const url = "member/new-me-member/my-gifts";
+    return axiosClient.get(url);
+  },
 };
 
 export default memberApi;

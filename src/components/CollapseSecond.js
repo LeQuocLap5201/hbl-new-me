@@ -1,10 +1,11 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Collapse, Spin } from "antd";
+import { Collapse } from "antd";
 import moment from "moment";
 import { useQuery } from "react-query";
 import memberApi from "../api/memberApi";
 import HistoryItem from "./HistoryItem";
+import Hourglass from "./Hourglass";
 
 CollapseSecond.propTypes = {
   idRace: PropTypes.number,
@@ -38,7 +39,7 @@ function CollapseSecond({ idRace }) {
             margin: "20px 0",
           }}
         >
-          <Spin />
+          <Hourglass />
         </div>
       )}
       {data?.length === 0 && (

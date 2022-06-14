@@ -8,7 +8,6 @@ import {
   message,
   notification,
   Space,
-  Spin,
   Modal,
   Progress,
 } from "antd";
@@ -21,6 +20,7 @@ import {
 import UploadCustom from "./UploadCustom";
 import { useMutation, useQuery, useQueryClient } from "react-query";
 import memberApi from "../api/memberApi";
+import Hourglass from "./Hourglass";
 
 FormHeal.propTypes = {
   isDetail: PropTypes.bool,
@@ -276,7 +276,7 @@ function FormHeal({ isDetail, idDetail, FnShow, form }) {
           margin: "20px 0",
         }}
       >
-        <Spin />
+        <Hourglass />
       </div>
     );
   }
